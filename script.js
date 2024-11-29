@@ -39,3 +39,28 @@ function changeBackgroundColor(i, type){
     backgroundDiv.className = "poke-img-div";
     backgroundDiv.classList.add(type);   
 }
+
+function openPokeDetailCard(i){
+    let dialogContainer = document.getElementById("poke_detail_card_dialog");
+    dialogContainer.innerHTML = getPokeDetailCardTemplate(i); 
+    dialogContainer.showModal();
+}
+
+function formatHeight(heigth){
+    let centimeters = heigth / 10;
+    return centimeters.toFixed(2).replace('.', ',') + ' cm';
+}
+
+function formatWeight(weight){
+  let kg = Math.floor(weight / 10);
+  let g = weight % 10;
+  return `${kg},${g.toString().padEnd(2, '0')} kg`;
+}
+
+function getAbilities(i){
+    let abilitieArr = [];
+    for(let j=0; j<data[i].abilities.length; j++){
+        abilitieArr.push(capitalizeFirstLetter(data[i].abilities[j].ability.name));
+    }
+    return `${abilitieArr.join(", ")}`;
+}

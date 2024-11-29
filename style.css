@@ -66,11 +66,7 @@ header {
 
 .poke-img-div:hover {
     cursor: pointer;
-}
-
-.poke-card:hover .poke-img {
-    filter: drop-shadow(8px -9px 11px #000000);
-    transition: all 100ms ease-in-out;
+    transform: scale(-1, 1);
 }
 
 .poke-img-div {
