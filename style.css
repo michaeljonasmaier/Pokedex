@@ -1,0 +1,121 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background-color: #0E1A1F;
+    font-family: 'Roboto Mono';
+}
+
+.full-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 100%;
+    align-items: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+header {
+    background-color: #082029;
+    color: white;
+    height: 100px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#poke_content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.poke-card {
+    width: 250px;
+    background-color: #0c303d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    border-radius: 20px;
+}
+
+.poke-img-div:hover {
+    cursor: pointer;
+}
+
+.poke-card:hover .poke-img {
+    filter: drop-shadow(8px -9px 11px #000000);
+    transition: all 100ms ease-in-out;
+}
+
+.poke-img-div {
+    background-color: aquamarine;
+}
+
+.poke-img {
+    width: 250px;
+    filter: drop-shadow(8px 8px 11px #000000);
+}
+
+.type-icon{
+    width: 30px;
+    height: 30px;
+}
+
+.type-icon:hover {
+    cursor: pointer;
+}
+
+.poke-card-footer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+}
+
+.load-button {
+    width: 150px;
+    padding: 15px;
+    border-radius: 30px;
+    color: white;
+    background-color: transparent;
+    border-style: groove;
+    border-color: aquamarine;
+}
+
+.load-button:hover {
+    cursor: pointer;
+    scale: 1.015;
+    transition: all 100ms ease-in-out;
+}
+
+footer {
+    background-color: #082029;
+    height: 100px;
+}
