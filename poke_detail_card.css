@@ -22,27 +22,32 @@ dialog {
     width: 30px;
 }
 
-.poke-detail-card-title-div{
+.poke-detail-card-header img:hover {
+    cursor: pointer;
+}
+
+.poke-detail-card-title-div {
     display: flex;
     justify-content: space-between;
     align-items: end;
     margin-top: 10px;
 }
 
-#poke_detail_card_title, #poke_detail_card_id{
+#poke_detail_card_title,
+#poke_detail_card_id {
     margin: 0;
 }
 
-#poke_detail_img_div{
+#poke_detail_img_div {
     height: 180px;
 }
 
-#poke_detail_img{
+#poke_detail_img {
     width: 200px;
     filter: drop-shadow(8px 8px 11px #313131);
 }
 
-.poke-detail-card-info-div{
+.poke-detail-card-info-div {
     background-color: white;
     flex: 1;
     width: 100%;
@@ -55,19 +60,19 @@ dialog {
     align-items: center;
 }
 
-.poke-detail-card-info-nav{
+.poke-detail-card-info-nav {
     width: 90%;
     display: flex;
     justify-content: space-between;
     padding-bottom: 30px
 }
 
-.poke-detail-card-info-nav a{
+.poke-detail-card-info-nav a {
     color: rgb(140, 140, 140);
     text-decoration: none;
 }
 
-#poke_detail_card_info{
+#poke_detail_card_info {
     color: black;
     width: 90%;
 }
@@ -81,6 +86,6 @@ dialog {
 }
 
 #poke_detail_card_info td:first-child {
-    width: 150px; 
+    width: 150px;
     color: rgb(140, 140, 140);
-  }
+}

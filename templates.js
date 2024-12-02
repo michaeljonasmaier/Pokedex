@@ -4,7 +4,7 @@ function getPokecardTemplate(i) {
         <div class="poke-card-header">
             <h2>#${styleID(data[i].id)} ${capitalizeFirstLetter(data[i].name)}</h2>
         </div>
-        <div id="poke_img_div_${i}" class="poke-img-div ${data[i].types[0].type.name}" onclick="openPokeDetailCard(${i})">
+        <div id="poke_img_div_${i}" class="poke-img-div ${data[i].types[0].type.name}" onclick="openPokeDetailCard(${i}), bubblingProtection(event)">
             <img class="poke-img" src="${data[i].sprites.other.home.front_shiny}" alt="Image of ${data[i].name}">
         </div>
         <div class="poke-card-footer">
@@ -24,9 +24,9 @@ function getTypeIconTemplate(i){
 function getPokeDetailCardTemplate(i){
     return /*html*/`
     
-        <div id="poke_detail_card_div" class="poke-detail-card-div">
+        <div id="poke_detail_card_div" class="poke-detail-card-div" onclick="bubblingProtection(event)">
             <div class="poke-detail-card-header">
-                <img src="./img/pfeil.png" alt="">
+                <img src="./img/pfeil.png" alt="" onclick="closePokeDetailCard()">
                 <div class="poke-detail-card-title-div">
                     <h1 id="poke_detail_card_title">${capitalizeFirstLetter(data[i].name)}</h2>
                     <p id="poke_detail_card_id">#${styleID(data[i].id)}</p>
@@ -81,11 +81,11 @@ function getPoketDetailCardAboutTemplate(i){
     </tr>
     <tr>
       <td>Egg Groups</td>
-      <td>${formatHeight(data[i].height)}</td>
+      <td></td>
     </tr>
     <tr>
       <td>Egg Cycle</td>
-      <td>${formatWeight(data[i].weight)}</td>
+      <td></td>
     </tr>
     </table>`
 }

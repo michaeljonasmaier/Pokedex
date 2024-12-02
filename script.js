@@ -21,6 +21,8 @@ async function fetchDataJson(loadIndex) {
     render();
 }
 
+
+
 function loadMore() {
     loadIndex += 10;
     fetchDataJson(loadIndex);
@@ -46,6 +48,13 @@ function openPokeDetailCard(i){
     dialogContainer.showModal();
 }
 
+function closePokeDetailCard(){
+    console.log("wir closen");
+    
+    let dialogContainer = document.getElementById("poke_detail_card_dialog");
+    dialogContainer.close();
+}
+
 function formatHeight(heigth){
     let centimeters = heigth / 10;
     return centimeters.toFixed(2).replace('.', ',') + ' cm';
@@ -63,4 +72,8 @@ function getAbilities(i){
         abilitieArr.push(capitalizeFirstLetter(data[i].abilities[j].ability.name));
     }
     return `${abilitieArr.join(", ")}`;
+}
+
+function bubblingProtection(event) {
+    event.stopPropagation();
 }
