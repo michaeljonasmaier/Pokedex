@@ -110,3 +110,20 @@ function getAbilities(i) {
 function bubblingProtection(event) {
     event.stopPropagation();
 }
+
+function nextPokemon(i){
+    if(i==data.length-1){
+        openPokeDetailCard(0);
+    } else {
+        openPokeDetailCard(i+1);
+    }  
+}
+
+function previousPokemon(i){
+    if(i==0){
+        openPokeDetailCard(data.length-1);
+    } else {
+        openPokeDetailCard(i-1);
+    }
+    
+}

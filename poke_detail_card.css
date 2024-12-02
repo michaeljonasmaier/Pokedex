@@ -39,7 +39,21 @@ dialog {
 }
 
 #poke_detail_img_div {
-    height: 180px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.arrow{
+    height: 30px;
+    width: 30px;
+}
+
+.arrow:hover{
+    cursor: pointer;
+    scale: 1.12;
 }
 
 #poke_detail_img {
@@ -88,6 +102,7 @@ dialog {
 #poke_detail_card_info td:first-child {
     width: 150px;
     color: rgb(140, 140, 140);
+    vertical-align: top;
 }
 
 #poke_detail_card_dialog::backdrop {

@@ -1,5 +1,5 @@
 function getPokecardTemplate(i) {
-    return /*html*/`
+  return /*html*/`
     <div class="poke-card">
         <div class="poke-card-header">
             <h2>#${styleID(data[i].id)} ${capitalizeFirstLetter(data[i].name)}</h2>
@@ -13,16 +13,16 @@ function getPokecardTemplate(i) {
     </div>`
 }
 
-function getTypeIconTemplate(i){
-    let typeContainer = "";
-    for(let j=0; j<data[i].types.length; j++){
-        typeContainer += /*html*/`<img class="type-icon" src="./img/${data[i].types[j].type.name}.svg" alt="" onclick="changeBackgroundColor(${i}, '${data[i].types[j].type.name}')">`
-    }
-    return typeContainer;
+function getTypeIconTemplate(i) {
+  let typeContainer = "";
+  for (let j = 0; j < data[i].types.length; j++) {
+    typeContainer += /*html*/`<img class="type-icon" src="./img/${data[i].types[j].type.name}.svg" alt="" onclick="changeBackgroundColor(${i}, '${data[i].types[j].type.name}')">`
+  }
+  return typeContainer;
 }
 
-function getPokeDetailCardTemplate(i){
-    return /*html*/`
+function getPokeDetailCardTemplate(i) {
+  return /*html*/`
     
         <div id="poke_detail_card_div" class="poke-detail-card-div" onclick="bubblingProtection(event)">
             <div class="poke-detail-card-header">
@@ -36,7 +36,9 @@ function getPokeDetailCardTemplate(i){
                 </div>
             </div>
             <div id="poke_detail_img_div">
+                    <img class="arrow" src="./img/previous_pokemon.png" alt="" onclick="previousPokemon(${i})">
                     <img id="poke_detail_img" src="${data[i].sprites.other.home.front_shiny}" alt="">
+                    <img class="arrow" src="./img/next_pokemon.png" alt="" onclick="nextPokemon(${i})">
             </div>
             <div class="poke-detail-card-info-div">
                 <div class="poke-detail-card-info-nav">
@@ -50,11 +52,11 @@ function getPokeDetailCardTemplate(i){
                 </div>
             </div>
         </div>
-    ` 
+    `
 }
 
-function getPoketDetailCardAboutTemplate(i){
-    return /*html*/`
+function getPoketDetailCardAboutTemplate(i) {
+  return /*html*/`
     <table class="poke-detail-card-info-table">
     <tr>
       <td>Species</td>
@@ -90,26 +92,26 @@ function getPoketDetailCardAboutTemplate(i){
     </table>`
 }
 
-function getGender(i){
+function getGender(i) {
   let genderRate = data[i].gender;
-  let female = 100*(genderRate/8)
-  let male = 100-female;
+  let female = 100 * (genderRate / 8)
+  let male = 100 - female;
   return `&#9794 ` + male + " % &#9792 " + female + " %";
 }
 
-function getEggGroup(i){
+function getEggGroup(i) {
   let eggGroupRef = "";
-  for(let j=0; j<data[i].egg_group.length; j++){
-    if(j<data[i].egg_group.length-1){
+  for (let j = 0; j < data[i].egg_group.length; j++) {
+    if (j < data[i].egg_group.length - 1) {
       eggGroupRef += capitalizeFirstLetter(data[i].egg_group[j]) + " ";
     } else {
       eggGroupRef += capitalizeFirstLetter(data[i].egg_group[j]);
-    }   
+    }
   }
   return eggGroupRef.split(" ").join(", ");
 }
 
-function getEggCylce(i){
+function getEggCylce(i) {
   let eggCycle = data[i].egg_cycle;
   return eggCycle;
 }
