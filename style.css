@@ -102,13 +102,17 @@ header {
     color: white;
     background-color: transparent;
     border-style: groove;
-    border-color: aquamarine;
+    border-color: #7fffd4;
 }
 
 .load-button:hover {
     cursor: pointer;
     scale: 1.015;
     transition: all 100ms ease-in-out;
+}
+
+.loading-spinner{
+    height: 25px;
 }
 
 footer {

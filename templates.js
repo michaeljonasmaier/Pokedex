@@ -77,17 +77,41 @@ function getPoketDetailCardAboutTemplate(i){
   <table class="poke-detail-card-info-table">
     <tr>
       <td>Gender</td>
-      <td></td>
+      <td>${getGender(i)}</td>
     </tr>
     <tr>
       <td>Egg Groups</td>
-      <td></td>
+      <td>${getEggGroup(i)}</td>
     </tr>
     <tr>
       <td>Egg Cycle</td>
-      <td></td>
+      <td>${getEggCylce(i)}</td>
     </tr>
     </table>`
+}
+
+function getGender(i){
+  let genderRate = data[i].gender;
+  let female = 100*(genderRate/8)
+  let male = 100-female;
+  return `&#9794 ` + male + " % &#9792 " + female + " %";
+}
+
+function getEggGroup(i){
+  let eggGroupRef = "";
+  for(let j=0; j<data[i].egg_group.length; j++){
+    if(j<data[i].egg_group.length-1){
+      eggGroupRef += capitalizeFirstLetter(data[i].egg_group[j]) + " ";
+    } else {
+      eggGroupRef += capitalizeFirstLetter(data[i].egg_group[j]);
+    }   
+  }
+  return eggGroupRef.split(" ").join(", ");
+}
+
+function getEggCylce(i){
+  let eggCycle = data[i].egg_cycle;
+  return eggCycle;
 }
 
 
