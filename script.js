@@ -25,10 +25,15 @@ async function fetchDataJson(loadIndex) {
     render();
 }
 
-function getAdditionalData(i, pokeSpeciesAsJson){
+function getAdditionalData(i, pokeSpeciesAsJson) {
     getGenderFromData(i, pokeSpeciesAsJson);
     getEggGroupFromData(i, pokeSpeciesAsJson);
     getEggCycleFromData(i, pokeSpeciesAsJson);
+    getHabitatFromData(i, pokeSpeciesAsJson);
+}
+
+function getHabitatFromData(i, pokeSpeciesAsJson) {
+    data[i - 1].habitat = pokeSpeciesAsJson.habitat.name;
 }
 
 function getGenderFromData(i, pokeSpeciesAsJson) {
@@ -111,19 +116,38 @@ function bubblingProtection(event) {
     event.stopPropagation();
 }
 
-function nextPokemon(i){
-    if(i==data.length-1){
+function nextPokemon(i) {
+    if (i == data.length - 1) {
         openPokeDetailCard(0);
     } else {
-        openPokeDetailCard(i+1);
-    }  
+        openPokeDetailCard(i + 1);
+    }
 }
 
-function previousPokemon(i){
-    if(i==0){
-        openPokeDetailCard(data.length-1);
+function previousPokemon(i) {
+    if (i == 0) {
+        openPokeDetailCard(data.length - 1);
     } else {
-        openPokeDetailCard(i-1);
+        openPokeDetailCard(i - 1);
     }
-    
+}
+
+function changeNavigation(element, id, i) {
+    let navLinks = document.getElementsByClassName("poke-detail-card-nav-link");
+    let infoContainer = document.getElementById("poke_detail_card_info");
+    infoContainer.innerHTML = "";
+    for (let i = 0; i < navLinks.length; i++) {
+        navLinks[i].classList.remove("active");
+    }
+    element.classList.add("active");
+
+    if (id == 1) {
+        infoContainer.innerHTML = getAboutTemplate(i);
+    } else if (id == 2) {
+        infoContainer.innerHTML = getStatsTemplate(i);
+    } else if (id == 3) {
+        infoContainer.innerHTML = getEvolutionTemplate(i);
+    } else {
+        infoContainer.innerHTML = getMovesTemplate(i);
+    }
 }

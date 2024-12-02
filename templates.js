@@ -42,25 +42,25 @@ function getPokeDetailCardTemplate(i) {
             </div>
             <div class="poke-detail-card-info-div">
                 <div class="poke-detail-card-info-nav">
-                    <a href="">About</a>
-                    <a href="">Base Stats</a>
-                    <a href="">Evolution</a>
-                    <a href="">Moves</a>
+                    <span class="poke-detail-card-nav-link active" onclick="changeNavigation(this, 1, ${i})">About</span>
+                    <span class="poke-detail-card-nav-link" onclick="changeNavigation(this, 2, ${i})">Base Stats</span>
+                    <span class="poke-detail-card-nav-link" onclick="changeNavigation(this, 3, ${i})">Evolution</span>
+                    <span class="poke-detail-card-nav-link" onclick="changeNavigation(this, 4, ${i})">Moves</span>
                 </div>
                 <div id="poke_detail_card_info">
-                    ${getPoketDetailCardAboutTemplate(i)}
+                    ${getAboutTemplate(i)}
                 </div>
             </div>
         </div>
     `
 }
 
-function getPoketDetailCardAboutTemplate(i) {
+function getAboutTemplate(i) {
   return /*html*/`
     <table class="poke-detail-card-info-table">
     <tr>
-      <td>Species</td>
-      <td></td>
+      <td>Habitat</td>
+      <td>${getHabitat(i)}</td>
     </tr>
     <tr>
       <td>Height</td>
@@ -92,6 +92,21 @@ function getPoketDetailCardAboutTemplate(i) {
     </table>`
 }
 
+function getStatsTemplate(i){
+  return /*html*/`
+  <p>Stats</p>` 
+}
+
+function getEvolutionTemplate(i){
+  return /*html*/`
+  <p>Evolution</p>` 
+}
+
+function getMovesTemplate(i){
+  return /*html*/`
+  <p>Moves</p>` 
+}
+
 function getGender(i) {
   let genderRate = data[i].gender;
   let female = 100 * (genderRate / 8)
@@ -114,6 +129,11 @@ function getEggGroup(i) {
 function getEggCylce(i) {
   let eggCycle = data[i].egg_cycle;
   return eggCycle;
+}
+
+function getHabitat(i){
+  let habitat = data[i].habitat;
+  return capitalizeFirstLetter(habitat);
 }
 
 

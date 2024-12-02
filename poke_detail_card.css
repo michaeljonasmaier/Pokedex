@@ -63,9 +63,9 @@ dialog {
 
 .poke-detail-card-info-div {
     background-color: white;
+    min-height: 345px;
     flex: 1;
     width: 100%;
-    z-index: -1;
     border-radius: 30px;
     padding-top: 50px;
     padding-bottom: 50px;
@@ -78,12 +78,22 @@ dialog {
     width: 90%;
     display: flex;
     justify-content: space-between;
-    padding-bottom: 30px
+    padding-bottom: 10px
 }
 
-.poke-detail-card-info-nav a {
-    color: rgb(140, 140, 140);
-    text-decoration: none;
+.poke-detail-card-nav-link {
+    color: rgb(137, 137, 137);
+    padding-bottom: 20px;
+}
+
+.poke-detail-card-nav-link:hover{
+    cursor: pointer;
+}
+
+.active{
+    color: black;
+    font-weight: bold;
+    border-bottom: solid 3px black;
 }
 
 #poke_detail_card_info {
