@@ -1,6 +1,7 @@
 let data = [];
 let currentData = [];
 let loadIndex = 1;
+let interimIndex;
 
 function init() {
     fetchDataJson(loadIndex);
@@ -161,15 +162,15 @@ function searchPokemon(){
     currentData = currentData.filter(item =>
         item.name.toLowerCase().includes(searchedPokemon.toLowerCase())
       );
-
       if(currentData.length!=0){
         clearContainer();
+        interimIndex = loadIndex;
         loadIndex = 1;
         render();
+        changeButtons();
       } else {
         showNoResultMessage(noResultMsg);    
       }
-    
 }
 
 function showNoResultMessage(noResultMsg){
@@ -181,4 +182,17 @@ function showNoResultMessage(noResultMsg){
 function clearContainer(){
     let container = document.getElementById("poke_content");
     container.innerHTML = "";
+}
+
+function changeButtons(){
+    document.getElementById("load_button").classList.toggle("d-none");
+    document.getElementById("show_all_button").classList.toggle("d-none");
+}
+
+function showAll(){
+    currentData = data;
+    clearContainer();
+    changeButtons();
+    render()
+    loadIndex = interimIndex;
 }
