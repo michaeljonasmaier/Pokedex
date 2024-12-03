@@ -101,15 +101,15 @@ dialog {
     width: 90%;
 }
 
-#poke_detail_card_info table {
+.poke-detail-card-info-table {
     border-collapse: collapse;
 }
 
-#poke_detail_card_info td {
+.poke-detail-card-info-table td {
     line-height: 1.7;
 }
 
-#poke_detail_card_info td:first-child {
+.poke-detail-card-info-table td:first-child {
     width: 150px;
     color: rgb(140, 140, 140);
     vertical-align: top;
@@ -117,4 +117,31 @@ dialog {
 
 #poke_detail_card_dialog::backdrop {
     backdrop-filter: blur(10px);
+}
+
+.poke-detail-card-stat-table td:first-child{
+    width: 100px;
+    color: rgb(140, 140, 140);
+    line-height: 1.7;
+}
+
+.poke-detail-card-stat-table td:nth-child(2){
+    width: 40px;
+}
+
+.progress-container {
+    width: 200px;
+    background-color: #e0e0e0;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+/* Fortschrittsbalken */
+.progress-bar {
+    height: 10px;
+    background-color: #76c7c0;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    border-radius: 25px;
 }

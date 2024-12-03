@@ -92,19 +92,64 @@ function getAboutTemplate(i) {
     </table>`
 }
 
-function getStatsTemplate(i){
+function getStatsTemplate(i) {
   return /*html*/`
-  <p>Stats</p>` 
+  <table class="poke-detail-card-stat-table">
+    <tr>
+      <td>HP</td>
+      <td>${currentData[i].stats[0].base_stat}</td>
+      <td>${generateProgressBar(currentData[i].stats[0].base_stat, 255)}</td>
+    </tr>
+    <tr>
+      <td>Attack</td>
+      <td>${currentData[i].stats[1].base_stat}</td>
+      <td>${generateProgressBar(currentData[i].stats[1].base_stat, 180)}</td>
+    </tr>
+    <tr>
+      <td>Defense</td>
+      <td>${currentData[i].stats[2].base_stat}</td>
+      <td>${generateProgressBar(currentData[i].stats[2].base_stat, 250)}</td>
+    </tr>
+    <tr>
+      <td>Special<br> Attack</td>
+      <td>${currentData[i].stats[3].base_stat}</td>
+      <td>${generateProgressBar(currentData[i].stats[3].base_stat, 252)}</td>
+    </tr>
+    <tr>
+      <td>Special<br> Defense</td>
+      <td>${currentData[i].stats[4].base_stat}</td>
+      <td>${generateProgressBar(currentData[i].stats[4].base_stat, 230)}</td>
+    </tr>
+    <tr>
+      <td>Speed</td>
+      <td>${currentData[i].stats[5].base_stat}</td>
+      <td>${generateProgressBar(currentData[i].stats[5].base_stat, 200)}</td>
+    </tr>
+    <tr>
+      <td>Total</td>
+      <td>${totalStats(i)}</td>
+      <td>${generateProgressBar(totalStats(i), 1367)}</td>
+    </tr>
+  </table>`
 }
 
-function getEvolutionTemplate(i){
-  return /*html*/`
-  <p>Evolution</p>` 
+function generateProgressBar(value, maxValue) {
+  let progress = 100 / maxValue * value;
+  let progressContainer = /*html*/`
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar" style="width: ${progress}%; background-color: ${getProgressBarColor(progress)}"></div>
+    </div>`
+  return progressContainer;
 }
 
-function getMovesTemplate(i){
+function getEvolutionTemplate(i) {
   return /*html*/`
-  <p>Moves</p>` 
+  <p>Evolution</p>`
+}
+
+function getMovesTemplate(i) {
+  return /*html*/`
+  <p>Moves</p>`
 }
 
 function getGender(i) {
@@ -131,7 +176,7 @@ function getEggCylce(i) {
   return eggCycle;
 }
 
-function getHabitat(i){
+function getHabitat(i) {
   let habitat = currentData[i].habitat;
   return capitalizeFirstLetter(habitat);
 }

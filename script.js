@@ -196,3 +196,26 @@ function showAll(){
     render()
     loadIndex = interimIndex;
 }
+
+function getProgressBarColor(progress) {
+    if (progress > 80) {
+      return "#379c30";
+    } else if (progress > 60) {
+      return "#5aeb50";
+    } else if (progress > 40) {
+      return "#c9eb50";
+    } else if (progress > 20) {
+      return "#ECA351";
+    } else {
+      return "#eb5050";
+    }
+  }
+  
+  function totalStats(i) {
+    let totalValue = 0;
+    for (let j = 0; j < currentData[i].stats.length; j++) {
+      totalValue += currentData[i].stats[j].base_stat;
+    }
+    return totalValue;
+  }
+  
