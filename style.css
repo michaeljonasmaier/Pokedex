@@ -33,6 +33,10 @@ h2 {
     font-size: 20px;
 }
 
+.d-none{
+    display: none;
+}
+
 header {
     background-color: #082029;
     color: white;
@@ -42,9 +46,31 @@ header {
 .header-content {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 100%;
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: 150px;
+}
+
+#search_button{
+    width: 100px;
+    padding: 5px;
+    border-radius: 30px;
+    color: white;
+    background-color: transparent;
+    border-style: solid;
+    border-color: #7fffd4;
+}
+
+#search_button:hover {
+    cursor: pointer;
+    background-color: #3a9073;
+    transition: all 100ms ease-in-out;
+}
+
+#search_input{
+    height: 25px;
+    border-color: #3a9073;
 }
 
 #poke_content {
@@ -107,7 +133,7 @@ header {
 
 .load-button:hover {
     cursor: pointer;
-    scale: 1.015;
+    background-color: #3a9073;
     transition: all 100ms ease-in-out;
 }
 

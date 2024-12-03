@@ -2,10 +2,10 @@ function getPokecardTemplate(i) {
   return /*html*/`
     <div class="poke-card">
         <div class="poke-card-header">
-            <h2>#${styleID(data[i].id)} ${capitalizeFirstLetter(data[i].name)}</h2>
+            <h2>#${styleID(currentData[i].id)} ${capitalizeFirstLetter(currentData[i].name)}</h2>
         </div>
-        <div id="poke_img_div_${i}" class="poke-img-div ${data[i].types[0].type.name}" onclick="openPokeDetailCard(${i}), bubblingProtection(event)">
-            <img class="poke-img" src="${data[i].sprites.other.home.front_shiny}" alt="Image of ${data[i].name}">
+        <div id="poke_img_div_${i}" class="poke-img-div ${currentData[i].types[0].type.name}" onclick="openPokeDetailCard(${i}), bubblingProtection(event)">
+            <img class="poke-img" src="${data[i].sprites.other.home.front_shiny}" alt="Image of ${currentData[i].name}">
         </div>
         <div class="poke-card-footer">
             ${getTypeIconTemplate(i)}
@@ -15,8 +15,8 @@ function getPokecardTemplate(i) {
 
 function getTypeIconTemplate(i) {
   let typeContainer = "";
-  for (let j = 0; j < data[i].types.length; j++) {
-    typeContainer += /*html*/`<img class="type-icon" src="./img/${data[i].types[j].type.name}.svg" alt="" onclick="changeBackgroundColor(${i}, '${data[i].types[j].type.name}')">`
+  for (let j = 0; j < currentData[i].types.length; j++) {
+    typeContainer += /*html*/`<img class="type-icon" src="./img/${currentData[i].types[j].type.name}.svg" alt="" onclick="changeBackgroundColor(${i}, '${currentData[i].types[j].type.name}')">`
   }
   return typeContainer;
 }
@@ -28,8 +28,8 @@ function getPokeDetailCardTemplate(i) {
             <div class="poke-detail-card-header">
                 <img src="./img/pfeil.png" alt="" onclick="closePokeDetailCard()">
                 <div class="poke-detail-card-title-div">
-                    <h1 id="poke_detail_card_title">${capitalizeFirstLetter(data[i].name)}</h2>
-                    <p id="poke_detail_card_id">#${styleID(data[i].id)}</p>
+                    <h1 id="poke_detail_card_title">${capitalizeFirstLetter(currentData[i].name)}</h2>
+                    <p id="poke_detail_card_id">#${styleID(currentData[i].id)}</p>
                 </div>
                 <div id="poke_detail_card_type_div">
                             
@@ -37,7 +37,7 @@ function getPokeDetailCardTemplate(i) {
             </div>
             <div id="poke_detail_img_div">
                     <img class="arrow" src="./img/previous_pokemon.png" alt="" onclick="previousPokemon(${i})">
-                    <img id="poke_detail_img" src="${data[i].sprites.other.home.front_shiny}" alt="">
+                    <img id="poke_detail_img" src="${currentData[i].sprites.other.home.front_shiny}" alt="">
                     <img class="arrow" src="./img/next_pokemon.png" alt="" onclick="nextPokemon(${i})">
             </div>
             <div class="poke-detail-card-info-div">
@@ -64,11 +64,11 @@ function getAboutTemplate(i) {
     </tr>
     <tr>
       <td>Height</td>
-      <td>${formatHeight(data[i].height)}</td>
+      <td>${formatHeight(currentData[i].height)}</td>
     </tr>
     <tr>
       <td>Weight</td>
-      <td>${formatWeight(data[i].weight)}</td>
+      <td>${formatWeight(currentData[i].weight)}</td>
     </tr>
     <tr>
       <td>Abilities</td>
@@ -108,7 +108,7 @@ function getMovesTemplate(i){
 }
 
 function getGender(i) {
-  let genderRate = data[i].gender;
+  let genderRate = currentData[i].gender;
   let female = 100 * (genderRate / 8)
   let male = 100 - female;
   return `&#9794 ` + male + " % &#9792 " + female + " %";
@@ -116,23 +116,23 @@ function getGender(i) {
 
 function getEggGroup(i) {
   let eggGroupRef = "";
-  for (let j = 0; j < data[i].egg_group.length; j++) {
-    if (j < data[i].egg_group.length - 1) {
-      eggGroupRef += capitalizeFirstLetter(data[i].egg_group[j]) + " ";
+  for (let j = 0; j < currentData[i].egg_group.length; j++) {
+    if (j < currentData[i].egg_group.length - 1) {
+      eggGroupRef += capitalizeFirstLetter(currentData[i].egg_group[j]) + " ";
     } else {
-      eggGroupRef += capitalizeFirstLetter(data[i].egg_group[j]);
+      eggGroupRef += capitalizeFirstLetter(currentData[i].egg_group[j]);
     }
   }
   return eggGroupRef.split(" ").join(", ");
 }
 
 function getEggCylce(i) {
-  let eggCycle = data[i].egg_cycle;
+  let eggCycle = currentData[i].egg_cycle;
   return eggCycle;
 }
 
 function getHabitat(i){
-  let habitat = data[i].habitat;
+  let habitat = currentData[i].habitat;
   return capitalizeFirstLetter(habitat);
 }
 

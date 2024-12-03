@@ -1,4 +1,5 @@
 let data = [];
+let currentData = [];
 let loadIndex = 1;
 
 function init() {
@@ -7,7 +8,7 @@ function init() {
 
 function render() {
     let container = document.getElementById("poke_content");
-    for (let i = loadIndex - 1; i < data.length; i++) {
+    for (let i = loadIndex - 1; i < currentData.length; i++) {
         container.innerHTML += getPokecardTemplate(i);
     }
 }
@@ -20,8 +21,9 @@ async function fetchDataJson(loadIndex) {
 
         let pokeSpecies = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${i}`);
         let pokeSpeciesAsJson = await pokeSpecies.json();
+        currentData = data;
         getAdditionalData(i, pokeSpeciesAsJson);
-    }
+    } 
     render();
 }
 
@@ -33,11 +35,11 @@ function getAdditionalData(i, pokeSpeciesAsJson) {
 }
 
 function getHabitatFromData(i, pokeSpeciesAsJson) {
-    data[i - 1].habitat = pokeSpeciesAsJson.habitat.name;
+    currentData[i - 1].habitat = pokeSpeciesAsJson.habitat.name;
 }
 
 function getGenderFromData(i, pokeSpeciesAsJson) {
-    data[i - 1].gender = pokeSpeciesAsJson.gender_rate;
+    currentData[i - 1].gender = pokeSpeciesAsJson.gender_rate;
 }
 
 function getEggGroupFromData(i, pokeSpeciesAsJson) {
@@ -45,11 +47,11 @@ function getEggGroupFromData(i, pokeSpeciesAsJson) {
     for (let j = 0; j < pokeSpeciesAsJson.egg_groups.length; j++) {
         eggArr.push(pokeSpeciesAsJson.egg_groups[j].name);
     }
-    data[i - 1].egg_group = eggArr;
+    currentData[i - 1].egg_group = eggArr;
 }
 
 function getEggCycleFromData(i, pokeSpeciesAsJson) {
-    data[i - 1].egg_cycle = pokeSpeciesAsJson.hatch_counter;
+    currentData[i - 1].egg_cycle = pokeSpeciesAsJson.hatch_counter;
 }
 
 async function loadMore() {
@@ -106,8 +108,8 @@ function formatWeight(weight) {
 
 function getAbilities(i) {
     let abilitieArr = [];
-    for (let j = 0; j < data[i].abilities.length; j++) {
-        abilitieArr.push(capitalizeFirstLetter(data[i].abilities[j].ability.name));
+    for (let j = 0; j < currentData[i].abilities.length; j++) {
+        abilitieArr.push(capitalizeFirstLetter(currentData[i].abilities[j].ability.name));
     }
     return `${abilitieArr.join(", ")}`;
 }
@@ -117,7 +119,7 @@ function bubblingProtection(event) {
 }
 
 function nextPokemon(i) {
-    if (i == data.length - 1) {
+    if (i == currentData.length - 1) {
         openPokeDetailCard(0);
     } else {
         openPokeDetailCard(i + 1);
@@ -126,7 +128,7 @@ function nextPokemon(i) {
 
 function previousPokemon(i) {
     if (i == 0) {
-        openPokeDetailCard(data.length - 1);
+        openPokeDetailCard(currentData.length - 1);
     } else {
         openPokeDetailCard(i - 1);
     }
@@ -150,4 +152,33 @@ function changeNavigation(element, id, i) {
     } else {
         infoContainer.innerHTML = getMovesTemplate(i);
     }
+}
+
+function searchPokemon(){
+    let searchedPokemon = document.getElementById("search_input").value;
+    let noResultMsg = document.getElementById("no_result");
+    noResultMsg.classList.add("d-none");
+    currentData = currentData.filter(item =>
+        item.name.toLowerCase().includes(searchedPokemon.toLowerCase())
+      );
+
+      if(currentData.length!=0){
+        clearContainer();
+        loadIndex = 1;
+        render();
+      } else {
+        showNoResultMessage(noResultMsg);    
+      }
+    
+}
+
+function showNoResultMessage(noResultMsg){
+    noResultMsg.classList.remove("d-none");
+    document.getElementById("search_input").select();
+    currentData = data;
+}
+
+function clearContainer(){
+    let container = document.getElementById("poke_content");
+    container.innerHTML = "";
 }
