@@ -11,6 +11,7 @@ body {
 .full-content {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     min-height: 100vh;
 }
 
@@ -35,6 +36,12 @@ h2 {
 
 .d-none{
     display: none;
+}
+
+.max-width{
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 header {
@@ -123,6 +130,7 @@ header {
 
 .load-button {
     width: 150px;
+    max-height: 50px;
     padding: 15px;
     border-radius: 30px;
     color: white;

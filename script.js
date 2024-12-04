@@ -1,5 +1,6 @@
 let data = [];
 let currentData = [];
+let evolutionChains = [];
 let loadIndex = 1;
 let interimIndex;
 
@@ -25,7 +26,40 @@ async function fetchDataJson(loadIndex) {
         currentData = data;
         getAdditionalData(i, pokeSpeciesAsJson);
     } 
+    await getEvolutionChains(loadIndex);
     render();
+}
+
+async function getEvolutionChains(loadIndex){
+    for(let i=loadIndex; i<loadIndex+5; i++){
+        let evolutionChain = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${i}/`);
+        let evolutionChainAsJson = await evolutionChain.json();
+        console.log(evolutionChainAsJson);
+        let allNames = getPokemonsOfEvolutionChain(evolutionChainAsJson);
+        evolutionChains.push(allNames);   
+    }
+    console.log(evolutionChains);
+}
+
+function getPokemonsOfEvolutionChain(evolutionChain){
+    let pokemonNames = [];
+          
+    function goThroughChain(node) {
+      // Wenn der Schlüssel "species" existiert und "name" enthält
+      if (node.species && node.species.name) {
+        pokemonNames.push(node.species.name);
+      }
+  
+      // Falls "evolves_to" existiert, durchlaufe alle Kinder
+      if (Array.isArray(node.evolves_to)) {
+        for (const child of node.evolves_to) {
+            goThroughChain(child);
+        }
+      }
+    }
+  
+    goThroughChain(evolutionChain.chain); // Start von der Wurzelkette
+    return pokemonNames;
 }
 
 function getAdditionalData(i, pokeSpeciesAsJson) {
@@ -33,6 +67,12 @@ function getAdditionalData(i, pokeSpeciesAsJson) {
     getEggGroupFromData(i, pokeSpeciesAsJson);
     getEggCycleFromData(i, pokeSpeciesAsJson);
     getHabitatFromData(i, pokeSpeciesAsJson);
+    getEvolutionChainIndexFromData(i, pokeSpeciesAsJson);
+}
+
+function getEvolutionChainIndexFromData(i, pokeSpeciesAsJson){
+    let evolutionChainIndex = pokeSpeciesAsJson.evolution_chain.url[pokeSpeciesAsJson.evolution_chain.url.length-2];
+    currentData[i-1].evolution_chain_index = evolutionChainIndex;
 }
 
 function getHabitatFromData(i, pokeSpeciesAsJson) {

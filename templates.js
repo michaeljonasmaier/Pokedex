@@ -143,8 +143,9 @@ function generateProgressBar(value, maxValue) {
 }
 
 function getEvolutionTemplate(i) {
+  let evolutionIndex = currentData[i].evolution_chain_index
   return /*html*/`
-  <p>Evolution</p>`
+  <p>${evolutionChains[evolutionIndex-1] }</p>`
 }
 
 function getMovesTemplate(i) {
