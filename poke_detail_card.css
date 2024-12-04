@@ -145,3 +145,33 @@ dialog {
     color: white;
     border-radius: 25px;
 }
+
+.evolution-chain-div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-top: 30px;
+}
+
+.evolution-chain-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.evolution-chain-image{
+    max-width: 100px;
+}
+
+#evolution_chain_image1{
+    width:60px;
+}
+
+#evolution_chain_image2{
+    width:80px;
+}
+
+#evolution_chain_image3{
+    width:100px;
+}

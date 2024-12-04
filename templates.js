@@ -143,9 +143,20 @@ function generateProgressBar(value, maxValue) {
 }
 
 function getEvolutionTemplate(i) {
-  let evolutionIndex = currentData[i].evolution_chain_index
-  return /*html*/`
-  <p>${evolutionChains[evolutionIndex-1] }</p>`
+  let evolutionIndex = currentData[i].evolution_chain_index;
+  let container = "";
+  let counter = 0;
+  for(let j =0; j<currentData.length; j++){
+    if(currentData[j].evolution_chain_index == evolutionIndex){
+      counter++;
+      container +=/*html*/`
+        <div class="evolution-chain-item">
+          <img class="evolution-chain-image" id="evolution_chain_image${counter}" src="${currentData[j].sprites.other.home.front_shiny}" alt="">
+          <p>${capitalizeFirstLetter(currentData[j].name)}</p>
+        </div>`
+    }
+  }
+  return /*html*/`<div class="evolution-chain-div">${container}</div>`;
 }
 
 function getMovesTemplate(i) {
