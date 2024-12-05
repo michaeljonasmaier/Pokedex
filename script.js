@@ -6,7 +6,9 @@ let interimIndex;
 let standbyIndex = 3;
 
 function init() {
+    toggleStartLoadingAnimation();
     fetchDataJson(loadIndex);
+    toggleStartLoadingAnimation();
 }
 
 function render() {
@@ -80,6 +82,10 @@ function getEggGroupFromData(i, pokeSpeciesAsJson) {
 
 function getEggCycleFromData(i, pokeSpeciesAsJson) {
     currentData[i - 1].egg_cycle = pokeSpeciesAsJson.hatch_counter;
+}
+
+function toggleStartLoadingAnimation(){
+    document.getElementById("loading_spinner_big").classList.toggle("d-none");
 }
 
 async function loadMore() {
