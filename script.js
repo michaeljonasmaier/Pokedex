@@ -42,7 +42,6 @@ async function fetchStandbyData(startIndex) {
         let standbyPokeSpeciesAsJson = await standbyPokeSpecies.json();
         getEvolutionChainIndexFromData(standbyData.length, standbyPokeSpeciesAsJson, standbyData); //standbyData.length weil immer dem letzten -1 der index hinzugefügt wird
     }
-    console.log(standbyData);
 }
 
 function getAdditionalData(i, pokeSpeciesAsJson) {
@@ -187,15 +186,29 @@ function searchPokemon() {
     let searchedPokemon = document.getElementById("search_input").value;
     let noResultMsg = document.getElementById("no_result");
     noResultMsg.classList.add("d-none");
-    currentData = currentData.filter(item =>
-        item.name.toLowerCase().includes(searchedPokemon.toLowerCase())
-    );
-    if (currentData.length != 0) {
+    currentData = data;//currentdata muss zurückgesetzt werden, damit alle objekte betrachtet werden und nicht nur die, die davor auch drin waren
+    if (searchedPokemon != "") { 
+        currentData = currentData.filter(item =>
+            item.name.toLowerCase().includes(searchedPokemon.toLowerCase())
+        );
+        displaySearchElements(noResultMsg);
+    } else {
         clearContainer();
         interimIndex = loadIndex;
         loadIndex = 1;
         render();
-        changeButtons();
+        displayLoadButtons();
+    }
+}
+
+function displaySearchElements(noResultMsg) {
+    if (currentData.length != 0) {
+        console.log("im if teil")
+        clearContainer();
+        interimIndex = loadIndex;
+        loadIndex = 1;
+        render();
+        displayShowAllButton();
     } else {
         showNoResultMessage(noResultMsg);
     }
@@ -212,13 +225,19 @@ function clearContainer() {
     container.innerHTML = "";
 }
 
-function changeButtons() {
-    document.getElementById("load_button").classList.toggle("d-none");
-    document.getElementById("show_all_button").classList.toggle("d-none");
+function displayLoadButtons() {
+    document.getElementById("load_button").classList.remove("d-none");
+    document.getElementById("show_all_button").classList.add("d-none");
+}
+
+function displayShowAllButton() {
+    document.getElementById("load_button").classList.add("d-none");
+    document.getElementById("show_all_button").classList.remove("d-none");
 }
 
 function showAll() {
     currentData = data;
+    document.getElementById("search_input").value = "";
     clearContainer();
     changeButtons();
     render()
