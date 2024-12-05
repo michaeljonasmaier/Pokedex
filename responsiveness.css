@@ -1,0 +1,20 @@
+@media(max-width: 900px){
+    .header-content{
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+}
+
+@media(max-width: 650px){
+    .main-content{
+        padding: 20px;
+    }
+}
+
+@media(max-width: 420px){
+    .header-content{
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+    }
+}
