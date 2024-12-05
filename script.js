@@ -1,7 +1,9 @@
 let data = [];
 let currentData = [];
+let standbyData = [];
 let loadIndex = 1;
 let interimIndex;
+let standbyIndex = 3;
 
 function init() {
     fetchDataJson(loadIndex);
@@ -24,8 +26,23 @@ async function fetchDataJson(loadIndex) {
         let pokeSpeciesAsJson = await pokeSpecies.json();
         currentData = data;
         getAdditionalData(i, pokeSpeciesAsJson);
-    } 
+    }
+    await fetchStandbyData(loadIndex + 10);
     render();
+}
+
+async function fetchStandbyData(startIndex) {
+    standbyData = [];
+    for (let j = startIndex; j < startIndex + 3; j++) {
+        let standbyPokeProfile = await fetch(`https://pokeapi.co/api/v2/pokemon/${j}/`);
+        let standbyPokeProfileAsJson = await standbyPokeProfile.json();
+        standbyData.push(standbyPokeProfileAsJson);
+
+        let standbyPokeSpecies = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${j}`);
+        let standbyPokeSpeciesAsJson = await standbyPokeSpecies.json();
+        getEvolutionChainIndexFromData(standbyData.length, standbyPokeSpeciesAsJson, standbyData); //standbyData.length weil immer dem letzten -1 der index hinzugefügt wird
+    }
+    console.log(standbyData);
 }
 
 function getAdditionalData(i, pokeSpeciesAsJson) {
@@ -33,12 +50,17 @@ function getAdditionalData(i, pokeSpeciesAsJson) {
     getEggGroupFromData(i, pokeSpeciesAsJson);
     getEggCycleFromData(i, pokeSpeciesAsJson);
     getHabitatFromData(i, pokeSpeciesAsJson);
-    getEvolutionChainIndexFromData(i, pokeSpeciesAsJson);
+    getEvolutionChainIndexFromData(i, pokeSpeciesAsJson, currentData);
 }
 
-function getEvolutionChainIndexFromData(i, pokeSpeciesAsJson){
-    let evolutionChainIndex = pokeSpeciesAsJson.evolution_chain.url[pokeSpeciesAsJson.evolution_chain.url.length-2];
-    currentData[i-1].evolution_chain_index = evolutionChainIndex;
+function getEvolutionChainIndexFromData(i, pokeSpeciesAsJson, array) {
+    let evolutionChainIndex = getLastNumberFromUrl(pokeSpeciesAsJson.evolution_chain.url);
+    array[i - 1].evolution_chain_index = evolutionChainIndex;
+}
+
+function getLastNumberFromUrl(url) {
+    let urlSplit = url.split("/");
+    return urlSplit[urlSplit.length - 2];
 }
 
 function getHabitatFromData(i, pokeSpeciesAsJson) {
@@ -161,41 +183,41 @@ function changeNavigation(element, id, i) {
     }
 }
 
-function searchPokemon(){
+function searchPokemon() {
     let searchedPokemon = document.getElementById("search_input").value;
     let noResultMsg = document.getElementById("no_result");
     noResultMsg.classList.add("d-none");
     currentData = currentData.filter(item =>
         item.name.toLowerCase().includes(searchedPokemon.toLowerCase())
-      );
-      if(currentData.length!=0){
+    );
+    if (currentData.length != 0) {
         clearContainer();
         interimIndex = loadIndex;
         loadIndex = 1;
         render();
         changeButtons();
-      } else {
-        showNoResultMessage(noResultMsg);    
-      }
+    } else {
+        showNoResultMessage(noResultMsg);
+    }
 }
 
-function showNoResultMessage(noResultMsg){
+function showNoResultMessage(noResultMsg) {
     noResultMsg.classList.remove("d-none");
     document.getElementById("search_input").select();
     currentData = data;
 }
 
-function clearContainer(){
+function clearContainer() {
     let container = document.getElementById("poke_content");
     container.innerHTML = "";
 }
 
-function changeButtons(){
+function changeButtons() {
     document.getElementById("load_button").classList.toggle("d-none");
     document.getElementById("show_all_button").classList.toggle("d-none");
 }
 
-function showAll(){
+function showAll() {
     currentData = data;
     clearContainer();
     changeButtons();
@@ -205,23 +227,23 @@ function showAll(){
 
 function getProgressBarColor(progress) {
     if (progress > 80) {
-      return "#379c30";
+        return "#379c30";
     } else if (progress > 60) {
-      return "#5aeb50";
+        return "#5aeb50";
     } else if (progress > 40) {
-      return "#c9eb50";
+        return "#c9eb50";
     } else if (progress > 20) {
-      return "#ECA351";
+        return "#ECA351";
     } else {
-      return "#eb5050";
+        return "#eb5050";
     }
-  }
-  
-  function totalStats(i) {
+}
+
+function totalStats(i) {
     let totalValue = 0;
     for (let j = 0; j < currentData[i].stats.length; j++) {
-      totalValue += currentData[i].stats[j].base_stat;
+        totalValue += currentData[i].stats[j].base_stat;
     }
     return totalValue;
-  }
-  
+}
+

@@ -146,8 +146,8 @@ function getEvolutionTemplate(i) {
   let evolutionIndex = currentData[i].evolution_chain_index;
   let container = "";
   let counter = 0;
-  for(let j =0; j<currentData.length; j++){
-    if(currentData[j].evolution_chain_index == evolutionIndex){
+  for (let j = 0; j < currentData.length; j++) {
+    if (currentData[j].evolution_chain_index == evolutionIndex) {
       counter++;
       container +=/*html*/`
         <div class="evolution-chain-item">
@@ -155,8 +155,25 @@ function getEvolutionTemplate(i) {
           <p>${capitalizeFirstLetter(currentData[j].name)}</p>
         </div>`
     }
+    
   }
-  return /*html*/`<div class="evolution-chain-div">${container}</div>`;
+  for(let k=0; k<standbyData.length; k++){
+    if (standbyData[k].evolution_chain_index == evolutionIndex) {
+      counter++;
+      container +=/*html*/`
+        <div class="evolution-chain-item">
+          <img class="evolution-chain-image" id="evolution_chain_image${counter}" src="${standbyData[k].sprites.other.home.front_shiny}" alt="">
+          <p>${capitalizeFirstLetter(standbyData[k].name)}</p>
+        </div>`
+    }
+  }
+  return /*html*/`
+  <div>
+    <h3>Evolution Chain:</h2>
+    <div class="evolution-chain-div">
+      ${container}
+    </div>
+  </div>`;
 }
 
 function getMovesTemplate(i) {

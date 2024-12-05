@@ -147,11 +147,12 @@ dialog {
 }
 
 .evolution-chain-div{
-    width: 100%;
+    max-width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: end;
     margin-top: 30px;
+    gap: 40px;
 }
 
 .evolution-chain-item{
