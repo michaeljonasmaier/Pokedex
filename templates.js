@@ -45,7 +45,7 @@ function getPokeDetailCardTemplate(i) {
                     <span class="poke-detail-card-nav-link active" onclick="changeNavigation(this, 1, ${i})">About</span>
                     <span class="poke-detail-card-nav-link" onclick="changeNavigation(this, 2, ${i})">Base Stats</span>
                     <span class="poke-detail-card-nav-link" onclick="changeNavigation(this, 3, ${i})">Evolution</span>
-                    <span class="poke-detail-card-nav-link" onclick="changeNavigation(this, 4, ${i})">Moves</span>
+                    <span class="poke-detail-card-nav-link" onclick="changeNavigation(this, 4, ${i})">Abilities</span>
                 </div>
                 <div id="poke_detail_card_info">
                     ${getAboutTemplate(i)}
@@ -71,8 +71,8 @@ function getAboutTemplate(i) {
       <td>${formatWeight(currentData[i].weight)}</td>
     </tr>
     <tr>
-      <td>Abilities</td>
-      <td>${getAbilities(i)}</td>
+      <td>Types</td>
+      <td>${getTypes(i)}</td>
     </tr>
   </table>
   <h2>Breeding</h2>

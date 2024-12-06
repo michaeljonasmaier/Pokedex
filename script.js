@@ -5,9 +5,9 @@ let loadIndex = 1;
 let interimIndex;
 let standbyIndex = 3;
 
-function init() {
+async function init() {
     toggleStartLoadingAnimation();
-    fetchDataJson(loadIndex);
+    await fetchDataJson(loadIndex);
     toggleStartLoadingAnimation();
 }
 
@@ -140,12 +140,12 @@ function formatWeight(weight) {
     return `${kg},${g.toString().padEnd(2, '0')} kg`;
 }
 
-function getAbilities(i) {
-    let abilitieArr = [];
-    for (let j = 0; j < currentData[i].abilities.length; j++) {
-        abilitieArr.push(capitalizeFirstLetter(currentData[i].abilities[j].ability.name));
+function getTypes(i) {
+    let typesArr = [];
+    for (let j = 0; j < currentData[i].types.length; j++) {
+        typesArr.push(capitalizeFirstLetter(currentData[i].types[j].type.name));
     }
-    return `${abilitieArr.join(", ")}`;
+    return `${typesArr.join(", ")}`;
 }
 
 function bubblingProtection(event) {
