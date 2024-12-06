@@ -11,10 +11,86 @@
     }
 }
 
+@media(max-width: 450px){
+   dialog{
+        width: 90%;
+    }
+
+    #poke_detail_card_div{
+        width: 100%;
+        padding-top: 15px;
+    }
+
+    .poke-detail-card-info-div{
+        font-size: 14px;
+        padding-top: 20px;
+        min-height: auto;
+    }
+
+    .poke-detail-card-info-nav{
+        flex-wrap: wrap;
+        border-bottom: 1px solid rgb(204, 204, 204);
+    }
+
+    .poke-detail-card-nav-link{
+        width: 50%;
+        text-align: center;
+        padding-bottom: 5px;
+        padding-top: 5px;
+    }
+
+    #poke_detail_card_info{
+        padding-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .active{
+        border: none;
+    }
+
+    .progress-container{
+        width: 150px;
+    }
+
+    .poke-detail-card-stat-table td:first-child {
+        width: 70px;
+    }
+
+    .poke-detail-card-stat-table td:nth-child(2) {
+        width: auto;
+    }  
+    .poke-detail-card-stat-table td:nth-child(3) {
+        width: auto;
+    }  
+
+    .poke-detail-card-info-table td:first-child {
+        width: 100px;
+    }
+
+    .evolution-div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .evolution-chain-div{
+        gap: 20px;
+    }
+   
+}
+
 @media(max-width: 420px){
     .header-content{
         flex-direction: column;
         justify-content: center;
+        gap: 10px;
+    }
+}
+
+@media(max-width: 360px){
+    .evolution-chain-div{
         gap: 10px;
     }
 }

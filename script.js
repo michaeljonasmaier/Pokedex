@@ -28,9 +28,26 @@ async function fetchDataJson(loadIndex) {
         let pokeSpeciesAsJson = await pokeSpecies.json();
         currentData = data;
         getAdditionalData(i, pokeSpeciesAsJson);
+
+        await getAbilityData(i, pokeProfileAsJson);
     }
     await fetchStandbyData(loadIndex + 10);
     render();
+}
+
+async function getAbilityData(i, pokeProfileAsJson){
+    currentData[i-1].effect = [];
+    for(let j = 0; j<pokeProfileAsJson.abilities.length; j++){
+        //console.log(pokeProfileAsJson.abilities[j].ability.name);
+        let pokeAbility = await fetch(pokeProfileAsJson.abilities[j].ability.url);
+        let pokeAbilityAsJson = await pokeAbility.json();
+
+        for(let k=0; k<pokeAbilityAsJson.effect_entries.length; k++){
+            if(pokeAbilityAsJson.effect_entries[k].language.name == "en"){
+                currentData[i-1].effect[j] = pokeAbilityAsJson.effect_entries[k].effect;
+            }
+        }
+    }
 }
 
 async function fetchStandbyData(startIndex) {
@@ -184,7 +201,7 @@ function changeNavigation(element, id, i) {
     } else if (id == 3) {
         infoContainer.innerHTML = getEvolutionTemplate(i);
     } else {
-        infoContainer.innerHTML = getMovesTemplate(i);
+        infoContainer.innerHTML = getAbilitiesTemplate(i);
     }
 }
 
@@ -270,5 +287,9 @@ function totalStats(i) {
         totalValue += currentData[i].stats[j].base_stat;
     }
     return totalValue;
+}
+
+function getAbilities(){
+
 }
 

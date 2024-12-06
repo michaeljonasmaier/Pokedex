@@ -168,7 +168,7 @@ function getEvolutionTemplate(i) {
     }
   }
   return /*html*/`
-  <div>
+  <div class="evolution-div">
     <h3>Evolution Chain:</h2>
     <div class="evolution-chain-div">
       ${container}
@@ -176,9 +176,14 @@ function getEvolutionTemplate(i) {
   </div>`;
 }
 
-function getMovesTemplate(i) {
-  return /*html*/`
-  <p>Moves</p>`
+function getAbilitiesTemplate(i) {
+  let container ="";
+  for(let j=0; j<currentData[i].effect.length; j++){
+    container += /*html*/`
+    <h3>${capitalizeFirstLetter(currentData[i].abilities[j].ability.name)}</h3>
+    <p class="abilities-text">${currentData[i].effect[j]}</p>`
+  }
+  return container;
 }
 
 function getGender(i) {
