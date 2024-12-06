@@ -262,7 +262,7 @@ function showAll() {
     currentData = data;
     document.getElementById("search_input").value = "";
     clearContainer();
-    changeButtons();
+    displayLoadButtons()
     render()
     loadIndex = interimIndex;
 }
