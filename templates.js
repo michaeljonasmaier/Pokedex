@@ -24,7 +24,7 @@ function getTypeIconTemplate(i) {
 function getPokeDetailCardTemplate(i) {
   return /*html*/`
     
-        <div id="poke_detail_card_div" class="poke-detail-card-div" onclick="bubblingProtection(event)">
+        <div id="poke_detail_card_div" class="poke-detail-card-div ${currentData[i].types[0].type.name}" onclick="bubblingProtection(event)">
             <div class="poke-detail-card-header">
                 <img src="./img/pfeil.png" alt="" onclick="closePokeDetailCard()">
                 <div class="poke-detail-card-title-div">
