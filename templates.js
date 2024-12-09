@@ -5,7 +5,7 @@ function getPokecardTemplate(i) {
             <h2>#${styleID(currentData[i].id)} ${capitalizeFirstLetter(currentData[i].name)}</h2>
         </div>
         <div id="poke_img_div_${i}" class="poke-img-div ${currentData[i].types[0].type.name}" onclick="openPokeDetailCard(${i}), bubblingProtection(event)">
-            <img class="poke-img" src="${data[i].sprites.other.home.front_shiny}" alt="Image of ${currentData[i].name}">
+            <img class="poke-img" src="${currentData[i].sprites.other.home.front_shiny}" alt="Image of ${currentData[i].name}">
         </div>
         <div class="poke-card-footer">
             ${getTypeIconTemplate(i)}

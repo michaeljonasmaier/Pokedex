@@ -229,7 +229,6 @@ function searchPokemon() {
 
 function displaySearchElements(noResultMsg) {
     if (currentData.length != 0) {
-        console.log("im if teil")
         clearContainer();
         interimIndex = loadIndex;
         loadIndex = 1;
