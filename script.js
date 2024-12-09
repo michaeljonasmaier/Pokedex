@@ -19,7 +19,7 @@ function render() {
 }
 
 async function fetchDataJson(loadIndex) {
-    for (let i = loadIndex; i < loadIndex + 10; i++) {
+    for (let i = loadIndex; i < loadIndex + 20; i++) {
         let pokeProfile = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`);
         let pokeProfileAsJson = await pokeProfile.json();
         data.push(pokeProfileAsJson);
@@ -31,14 +31,13 @@ async function fetchDataJson(loadIndex) {
 
         await getAbilityData(i, pokeProfileAsJson);
     }
-    await fetchStandbyData(loadIndex + 10);
+    await fetchStandbyData(loadIndex + 20);
     render();
 }
 
 async function getAbilityData(i, pokeProfileAsJson){
     currentData[i-1].effect = [];
     for(let j = 0; j<pokeProfileAsJson.abilities.length; j++){
-        //console.log(pokeProfileAsJson.abilities[j].ability.name);
         let pokeAbility = await fetch(pokeProfileAsJson.abilities[j].ability.url);
         let pokeAbilityAsJson = await pokeAbility.json();
 
@@ -106,7 +105,7 @@ function toggleStartLoadingAnimation(){
 }
 
 async function loadMore() {
-    loadIndex += 10;
+    loadIndex += 20;
     toggleLoadingAnimation(true);
     await fetchDataJson(loadIndex);
     toggleLoadingAnimation(false);
@@ -116,8 +115,10 @@ function toggleLoadingAnimation(load) {
     let button = document.getElementById("load_button");
     if (load) {
         button.innerHTML = `<img class="loading-spinner" src="./img/loading.gif" alt="Laden..." />`
+        button.disabled = true;
     } else {
         button.innerHTML = `LOAD MORE`
+        button.disabled = false;
     }
 }
 
@@ -138,11 +139,13 @@ function changeBackgroundColor(i, type) {
 function openPokeDetailCard(i) {
     let dialogContainer = document.getElementById("poke_detail_card_dialog");
     dialogContainer.innerHTML = getPokeDetailCardTemplate(i);
+    document.body.classList.add("overflow-hidden");
     dialogContainer.showModal();
 }
 
 function closePokeDetailCard() {
     let dialogContainer = document.getElementById("poke_detail_card_dialog");
+    document.body.classList.remove("overflow-hidden");
     dialogContainer.close();
 }
 
@@ -287,9 +290,5 @@ function totalStats(i) {
         totalValue += currentData[i].stats[j].base_stat;
     }
     return totalValue;
-}
-
-function getAbilities(){
-
 }
 
