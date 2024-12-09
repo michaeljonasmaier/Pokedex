@@ -11,6 +11,18 @@
     }
 }
 
+@media(max-width: 500px){
+    header{
+        height: 120px;
+    }
+
+    .header-content{
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+    }
+}
+
 @media(max-width: 450px){
    dialog{
         width: 90%;
@@ -79,14 +91,6 @@
         gap: 20px;
     }
    
-}
-
-@media(max-width: 420px){
-    .header-content{
-        flex-direction: column;
-        justify-content: center;
-        gap: 10px;
-    }
 }
 
 @media(max-width: 360px){

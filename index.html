@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex</title>
+    <link rel="icon" href="./img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="types.css">
     <link rel="stylesheet" href="fonts.css">
@@ -20,11 +21,12 @@
         <header>
             <div class="header-content max-width">
                 <div class="logo-div">
+                    <img src="./img/logo.png" alt="">
                     <h1>Pokedex</h1>
                 </div>
                 <div class="search-div">
                     <span id="no_result" class="d-none">Es konnte keine Übereinstimmung gefunden werden</span>
-                    <input id="search_input" type="text" onkeyup="searchPokemon()">
+                    <input id="search_input" type="text" onkeyup="searchPokemon()" placeholder="Search">
                     <span>Suche</span>
                 </div>
             </div>

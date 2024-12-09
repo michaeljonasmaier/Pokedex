@@ -67,6 +67,16 @@ header {
     padding-right: 50px;
 }
 
+.logo-div{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.logo-div img{
+    width: 50px;
+}
+
 #search_button{
     width: 100px;
     padding: 5px;
